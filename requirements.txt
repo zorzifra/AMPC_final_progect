@@ -1,5 +1,0 @@
-numpy
-scipy
-matplotlib
-casadi
-acados_template
