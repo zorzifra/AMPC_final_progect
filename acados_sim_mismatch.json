@@ -14,9 +14,9 @@
         "nz": 0
     },
     "external_function_files_model": [
-        "pendulum_true_ccc_model/pendulum_true_ccc_expl_ode_fun.c",
-        "pendulum_true_ccc_model/pendulum_true_ccc_expl_vde_forw.c",
-        "pendulum_true_ccc_model/pendulum_true_ccc_expl_vde_adj.c"
+        "pendulum_real_mismatch_model/pendulum_real_mismatch_expl_ode_fun.c",
+        "pendulum_real_mismatch_model/pendulum_real_mismatch_expl_vde_forw.c",
+        "pendulum_real_mismatch_model/pendulum_real_mismatch_expl_vde_adj.c"
     ],
     "json_file": "acados_sim_mismatch.json",
     "model": {
@@ -73,7 +73,7 @@
         "f_expl_expr": "SX(@1=-0.01, @2=0.1, @3=(1.1-(@2*sq(cos(theta)))), [v, omega, (((((@1*sin(theta))*sq(omega))+((0.981*cos(theta))*sin(theta)))+u)/@3), ((((((@1*cos(theta))*sin(theta))*sq(omega))+(u*cos(theta)))+(10.791*sin(theta)))/(@2*@3))])",
         "f_impl_expr": "SX(@1=-0.01, @2=0.1, @3=(1.1-(@2*sq(cos(theta)))), [(p_dot-v), (theta_dot-omega), (v_dot-(((((@1*sin(theta))*sq(omega))+((0.981*cos(theta))*sin(theta)))+u)/@3)), (omega_dot-((((((@1*cos(theta))*sin(theta))*sq(omega))+(u*cos(theta)))+(10.791*sin(theta)))/(@2*@3)))])",
         "gnsf_model": null,
-        "name": "pendulum_true_ccc",
+        "name": "pendulum_real_mismatch",
         "nu_original": null,
         "p": "SX(0x1)",
         "p_global": "SX(0x1)",
@@ -95,7 +95,7 @@
         "xdot": "SX([p_dot, theta_dot, v_dot, omega_dot])",
         "z": "SX(0x1)"
     },
-    "name": "pendulum_true_ccc",
+    "name": "pendulum_real_mismatch",
     "parameter_values": [],
     "problem_class": "SIM",
     "ros_opts": null,
@@ -117,7 +117,7 @@
         "sim_method_newton_iter": 3,
         "sim_method_newton_tol": 0.0,
         "sim_method_num_stages": 4,
-        "sim_method_num_steps": 3,
+        "sim_method_num_steps": 1,
         "with_batch_functionality": false
     }
 }
