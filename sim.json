@@ -18,7 +18,7 @@
         "inverted_pendulum_model/inverted_pendulum_expl_vde_forw.c",
         "inverted_pendulum_model/inverted_pendulum_expl_vde_adj.c"
     ],
-    "json_file": "acados_sim.json",
+    "json_file": "sim.json",
     "model": {
         "con_h_expr": [],
         "con_h_expr_0": [],
