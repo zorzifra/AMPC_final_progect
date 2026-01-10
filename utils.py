@@ -237,3 +237,61 @@ def inverted_pendulum_animation(p, theta, ts, filename=None):
             animation_writer.grab_frame()
             
     plt.close(fig)
+
+# added for Task 1
+def plot_comparison(time, time_dt, simX_std, simU_std, simX_ext, simU_ext):
+    """
+    Metodo per confrontare graficamente NMPC Standard vs NMPC Esteso (Task 1).
+    """
+    latexify_plot()
+
+    # --- 1. Plot degli Stati ---
+    fig, axes = plt.subplots(2, 2, figsize=(12, 8))
+    
+    # - Posizione carrello (p)
+    axes[0, 0].plot(time, simX_std[:, 0], label='Standard', linestyle='--')
+    axes[0, 0].plot(time, simX_ext[:, 0], label='Extended (Task 1)', alpha=0.8)
+    axes[0, 0].set_xlabel('time [s]')
+    axes[0, 0].set_ylabel('$p$ [m]')
+    axes[0, 0].grid(True)
+    axes[0, 0].legend()
+
+    # - Angolo pendolo (theta)
+    axes[0, 1].plot(time, np.rad2deg(simX_std[:, 1]), label='Standard', linestyle='--')
+    axes[0, 1].plot(time, np.rad2deg(simX_ext[:, 1]), label='Extended (Task 1)', alpha=0.8)
+    axes[0, 1].set_xlabel('time [s]')
+    axes[0, 1].set_ylabel('$\\theta$ [deg]')
+    axes[0, 1].grid(True)
+
+    # - Velocità carrello (v)
+    axes[1, 0].plot(time, simX_std[:, 2], label='Standard', linestyle='--')
+    axes[1, 0].plot(time, simX_ext[:, 2], label='Extended (Task 1)', alpha=0.8)
+    axes[1, 0].set_xlabel('time [s]')
+    axes[1, 0].set_ylabel('$v$ [m/s]')
+    axes[1, 0].grid(True)
+
+    # - Velocità angolare (omega)
+    axes[1, 1].plot(time, np.rad2deg(simX_std[:, 3]), label='Standard', linestyle='--')
+    axes[1, 1].plot(time, np.rad2deg(simX_ext[:, 3]), label='Extended (Task 1)', alpha=0.8)
+    axes[1, 1].set_xlabel('time [s]')
+    axes[1, 1].set_ylabel('$\omega$ [deg/s]')
+    axes[1, 1].grid(True)
+
+    plt.tight_layout()
+    plt.gcf().suptitle('Comparison: Standard vs Extended NMPC States', y=1.02)
+
+    # --- 2. Plot dell'Input di Controllo (Forza F) ---
+    plt.figure(figsize=(10, 5))
+    plt.step(time_dt, simU_std, label='Standard (Forza diretta)', where='post', linestyle='--')
+    plt.step(time_dt, simU_ext, label='Extended (Forza integrata)', where='post', alpha=0.8)
+    plt.axhline(y=20, color='r', linestyle=':', label='Constraint') # Vincolo Task 2 [cite: 54]
+    plt.axhline(y=-20, color='r', linestyle=':')
+    plt.xlabel('time [s]')
+    plt.ylabel('$F$ [N]')
+    plt.title('Control Input Comparison (Force Applied to Cart)')
+    plt.grid(True)
+    plt.legend()
+    plt.show()
+
+# Esempio di chiamata:
+# plot_comparison(time, time_dt, simX_std, simU_std, simX_ext, simU_ext)    
